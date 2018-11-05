@@ -16,12 +16,42 @@
  *
  */
 
+const fs = require('fs');
+const path = require('path');
+
+const CONTENT_NAME = 'content';
+const CONTENT_PATH = `../../${CONTENT_NAME}`;
+const MARKDOWN_EXTENSION = '.md';
+const HTML_EXTENSION = '.html';
+
+const isMarkdown = (fileName) => {
+  const lastThree = fileName.substr(fileName.length - 3);
+  return lastThree === MARKDOWN_EXTENSION;
+};
+
+const getNavItem = (item) => {
+  return {
+    name: item.replace(MARKDOWN_EXTENSION, ''),
+    path: `/${CONTENT_NAME}/${item.replace(MARKDOWN_EXTENSION, HTML_EXTENSION)}` };
+}
+
+const getNav = () => {
+  const contentPath = path.join(__dirname, CONTENT_PATH);
+  return fs.readdirSync(contentPath).reduce((filtered, item) => {
+    if (isMarkdown(item)) {
+      filtered.push(getNavItem(item));
+    }
+    return filtered;
+  }, []);
+}
+
 /**
  * The 'pre' function that is executed before the HTML is rendered
  * @param payload The current payload of processing pipeline
  * @param payload.content The content
  */
 function pre(payload) {
+  payload.content.nav = getNav();
   payload.content.time = `${new Date()}`;
 }
 

@@ -24,9 +24,14 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
-<div data-sly-list="${content.children}">
-    <div class="container">${item}</div>
+<nav data-sly-test="${content.nav.length}">
+    <h2>Navigation</h2>
+    <ul data-sly-list="${content.nav}">
+        <li><a href="${item.path}">${item.name}</a></li>
+    </ul>
+</nav>
+<div class="container" data-sly-list.child="${content.children}">
+    ${child}
 </div>
 
 <hr>
