@@ -25,8 +25,7 @@ const MARKDOWN_EXTENSION = '.md';
 const HTML_EXTENSION = '.html';
 
 const isMarkdown = (fileName) => {
-  const lastThree = fileName.substr(fileName.length - 3);
-  return lastThree === MARKDOWN_EXTENSION;
+  return fileName.endsWith(MARKDOWN_EXTENSION);
 };
 
 const getNavItem = (item) => {
