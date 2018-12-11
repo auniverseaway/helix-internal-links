@@ -28,10 +28,32 @@ const isMarkdown = (fileName) => {
   return fileName.endsWith(MARKDOWN_EXTENSION);
 };
 
+const isIndex = (item) => {
+  return item === 'index.md';
+}
+
+const getIndexName = (item) => {
+  return path.basename(path.dirname(`${CONTENT_PATH}/${item}`));
+}
+
+const getIndexPath = (item) => {
+  const indexPath = path.dirname(`${CONTENT_PATH}/${item}`).split(path.sep).pop();
+  return `${indexPath}${HTML_EXTENSION}`;
+}
+
+const getName = (item) => {
+  return isIndex(item) ? getIndexName(item) : item.replace(MARKDOWN_EXTENSION, '');
+}
+
+const getPath = (item) => {
+  return isIndex(item) ? getIndexPath(item) : `/${CONTENT_NAME}/${item.replace(MARKDOWN_EXTENSION, HTML_EXTENSION)}`;
+}
+
 const getNavItem = (item) => {
   return {
-    name: item.replace(MARKDOWN_EXTENSION, ''),
-    path: `/${CONTENT_NAME}/${item.replace(MARKDOWN_EXTENSION, HTML_EXTENSION)}` };
+    name: getName(item),
+    path: getPath(item)
+  };
 }
 
 const getNav = () => {
@@ -49,7 +71,9 @@ const getNav = () => {
  * @param payload The current payload of processing pipeline
  * @param payload.content The content
  */
-function pre(payload) {
+function pre(payload, actions) {
+
+  payload.content.repoUrl = actions.secrets.REPO_API_ROOT;
   payload.content.nav = getNav();
   payload.content.time = `${new Date()}`;
 }

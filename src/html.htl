@@ -30,6 +30,7 @@
         <li><a href="${item.path}">${item.name}</a></li>
     </ul>
 </nav>
+${content.repoUrl}
 <div class="container" data-sly-list.child="${content.children}">
     ${child}
 </div>
