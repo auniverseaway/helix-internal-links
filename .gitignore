@@ -4,4 +4,4 @@ node_modules/
 pipeline.log
 logs
 dist
-.vscode
+.vscode/
