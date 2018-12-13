@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="${content.hostName}spa/dist/css/index.css"/>
 </head>
 <body class="spectrum">
-<div data-sly-test="${content.isAdmin}" id="admin"></div>
+<div data-sly-test="${content.isAdmin}" data-host-name="${content.hostName}" id="admin"></div>
 <div data-sly-test="${!content.isAdmin}" class="container" data-sly-list.child="${content.children}">
     ${child}
 </div>

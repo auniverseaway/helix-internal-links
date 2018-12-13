@@ -17,6 +17,9 @@ body {
     width: 100%;
     min-height: 800px;
     border: none;
+    padding: 24px;
+    line-height: 1.2;
+    font-size: 16px;
 }
 
 .helix-Icon.helix-Icon--action {

@@ -37,7 +37,7 @@ function formatTree(tree) {
 
 async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
-    const sha = request.headers['x-helix-git-tree'];
+    const { sha } = payload.request.params;
     const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/trees/${sha}`;
     const files = await (await (fetch(url)
       .then(res => {
