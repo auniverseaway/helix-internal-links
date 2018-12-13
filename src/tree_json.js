@@ -1,7 +1,17 @@
 const fetch = require('node-fetch');
 
+const hiddenFiles = [ 
+    'src',
+    'package-lock.json',
+    'package.json',
+    'spa',
+    'config.yml',
+    'LICENSE',
+    'admin.md',
+    'webpack.config.js'];
+
 function isHiddenOrSrc(str) {
-    return str.substr(0, 1) === '.' || str === 'src';
+    return str.substr(0, 1) === '.' || hiddenFiles.indexOf(str) > -1;
 }
 
 function isTree(file) {
