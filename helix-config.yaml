@@ -1,0 +1,5 @@
+strains:
+    default:
+        code: /cmillar/default/git-github-com-auniverseaway-helix-internal-links-git--master--
+        static: https://github.com/auniverseaway/helix-internal-links.git#master
+        content: https://github.com/auniverseaway/helix-internal-links.git#master
