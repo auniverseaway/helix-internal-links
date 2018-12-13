@@ -4,7 +4,7 @@ import Button from '@react/react-spectrum/Button';
 import Edit from '@react/react-spectrum/Icon/Edit';
 import Preview from '@react/react-spectrum/Icon/Preview';
 import ButtonGroup from '@react/react-spectrum/ButtonGroup';
-import {ColumnView, ColumnViewDataSource} from '@react/react-spectrum/ColumnView';
+import { ColumnView, ColumnViewDataSource } from '@react/react-spectrum/ColumnView';
 import unescapeJs from 'unescape-js';
 
 const MARKDOWN_EXTENSION = '.md';
@@ -22,20 +22,23 @@ const isMarkdown = (fileName) => {
   return fileName.endsWith(MARKDOWN_EXTENSION);
 };
 
-function getFetchUrl(type, sha) {
+function getFetchUrl(type, sha, label) {
   const hostName = getHostName();
   const fetchUrl = new URL(`${hostName}index.${type}.json`);
-  fetchUrl.searchParams.append('sha', sha);
+  if (sha) {
+    fetchUrl.searchParams.append('sha', sha);
+    fetchUrl.searchParams.append('label', label);
+  }
   return fetchUrl;
 }
 
 class HelixDS extends ColumnViewDataSource {
   async getChildren(item) {
     if (!item) {
-      return this.getTree('master');
+      return this.getTree({ sha: '', label: '' });
     }
     if (item.children) {
-      return this.getTree(item.sha);
+      return this.getTree(item);
     }
     return item.children;
   }
@@ -48,9 +51,9 @@ class HelixDS extends ColumnViewDataSource {
     return a.label === b.label;
   }
 
-  async getTree(sha) {
+  async getTree(item) {
     const data = await (await (
-        fetch(getFetchUrl('tree', sha)).then(res => {
+        fetch(getFetchUrl('tree', item.sha, item.label)).then(res => {
           return res.json();
         }).catch(err => {
           console.log('Error: ', err);
@@ -85,8 +88,8 @@ class App extends Component {
 
   async change(buttonValue) {
     if (buttonValue === 'edit') {
-      const sha = this.state.selectedItems[0].sha;
-      const content = await this.getLeafContent(sha);
+      const item = this.state.selectedItems[0];
+      const content = await this.getLeafContent(item);
       this.setState({ editorValue: sanitizeMarkdown(content) });
     }
     if (buttonValue === 'view') {
@@ -101,9 +104,10 @@ class App extends Component {
     this.setState({ editorValue: event.target.value});
   }
 
-  async getLeafContent(sha) {
+  async getLeafContent(item) {
+    console.log(item);
     const data = await (await (
-        fetch(getFetchUrl('leaf', sha)).then(res => {
+        fetch(getFetchUrl('leaf', item.sha)).then(res => {
           return res.text();
         }).catch(err => {
           console.log('Error: ', err);

@@ -19,13 +19,20 @@ function isTree(file) {
     return file.type === 'tree';
 }
 
-function formatTree(tree) {
-    return tree.reduce(function(filtered, file) {
+function formatTree(tree, label, parent) {
+    let url = '/';
+    if (parent) {
+        url += `${parent}/`;
+    }
+    if (label) {
+        url += `${label}/`;
+    }
+    return tree.reduce((filtered, file) => {
         if (!isHiddenOrSrc(file.path)) {
             const displayFile = { 
                 label: file.path,
                 sha: file.sha,
-                url: file.url
+                url: `${url}${file.path}`,
             };
             if (isTree(file)) {
                 displayFile.children = [];
@@ -39,8 +46,11 @@ function formatTree(tree) {
 async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
     const { sha } = payload.request.params;
-    const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/trees/${sha}`;
-    
+    const { label } = payload.request.params;
+    const { parent } = payload.request.params;
+    const ref = sha || request.params.ref;
+    const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/trees/${ref}`;
+
     const options = { uri: url, json: true, headers: { 'User-Agent': 'Request-Promise' } };
     const files = await client(options)
         .then((files) => {
@@ -50,7 +60,7 @@ async function main(payload, { logger, request, secrets }) {
             console.log('Error: ', err);
         });
 
-    payload.response.body = formatTree(files.tree);
+    payload.response.body = formatTree(files.tree, label, parent);
   
     return {
       response: payload.response
