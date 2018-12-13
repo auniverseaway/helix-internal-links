@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const client = require('request-promise-native');
 const base64 = require('js-base64').Base64;
 
 function decodeContent(content) {
@@ -8,16 +8,27 @@ function decodeContent(content) {
 async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
     const { sha } = payload.request.params;
-
     const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/blobs/${sha}`;
-    const leaf = await (await (fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .catch(err => {
-        console.log('Error: ', err);
-      })
-    ));
+    
+    const options = { uri: url, json: true, headers: { 'User-Agent': 'Request-Promise' } };
+    const leaf = await client(options)
+        .then((leaf) => {
+            return leaf;
+        }).catch((err) => {
+            console.log('Error: ', err);
+        });
+
+
+    // const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/blobs/${sha}`;
+
+    // const leaf = await (await (fetch(url)
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .catch(err => {
+    //     console.log('Error: ', err);
+    //   })
+    // ));
 
     const content = decodeContent(leaf.content);
     payload.response.body = content;

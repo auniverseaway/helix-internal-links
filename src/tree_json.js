@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const client = require('request-promise-native');
 
 const hiddenFiles = [ 
     'src',
@@ -6,7 +6,7 @@ const hiddenFiles = [
     'package.json',
     'spa',
     'config.yml',
-    'helix-config.yml',
+    'helix-config.yaml',
     'LICENSE',
     'admin.md',
     'webpack.config.js'];
@@ -40,14 +40,15 @@ async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
     const { sha } = payload.request.params;
     const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/trees/${sha}`;
-    const files = await (await (fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .catch(err => {
-        console.log('Error: ', err)
-      })
-    ));
+    
+    const options = { uri: url, json: true, headers: { 'User-Agent': 'Request-Promise' } };
+    const files = await client(options)
+        .then((files) => {
+            return files;
+        })
+        .catch((err) => {
+            console.log('Error: ', err);
+        });
 
     payload.response.body = formatTree(files.tree);
   
