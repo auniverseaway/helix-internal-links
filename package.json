@@ -38,7 +38,6 @@
   "dependencies": {
     "@react/react-spectrum": "^2.15.0",
     "node-fetch": "^2.3.0",
-    "react-markdown-textarea": "^1.0.1",
     "unescape-js": "^1.1.1"
   }
 }
