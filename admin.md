@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!--
   ~ Licensed to the Apache Software Foundation (ASF) under one or more
   ~ contributor license agreements.  See the NOTICE file distributed with
@@ -15,19 +14,21 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <title>${content.title}</title>
-    <link rel="stylesheet" href="${content.hostName}spa/dist/css/index.css"/>
-</head>
-<body class="spectrum">
-<div data-sly-test="${content.isAdmin}" id="admin"></div>
-<div data-sly-test="${!content.isAdmin}" class="container" data-sly-list.child="${content.children}">
-    ${child}
-</div>
-<script data-sly-test="${content.isAdmin}" src="${content.hostName}spa/dist/js/index.min.js" async></script>
-</body>
-</html>
+![helix-logo](./helix_logo.png)
+
+# Helix - internal
+
+It works! internal is up and running.
+
+## What's next?
+
+1. Try editing `index.md` and see what happens.
+2. Try editing `src/html.htl` to change the HTML output
+3. Try editing `src/static/style.css` to change the way this page looks
+
+## And then?
+
+4. Commit your changes: `git commit -a`
+5. Publish your project to GitHub: `git add git remote add origin https://github.com/user/repo.git && git push`
+6. Deploy the project: `hlx deploy`
+7. Make it visible to the world: `hlx strains`

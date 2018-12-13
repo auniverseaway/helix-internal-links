@@ -16,54 +16,8 @@
  *
  */
 
-const fs = require('fs');
-const path = require('path');
-
-const CONTENT_NAME = 'content';
-const CONTENT_PATH = `../../${CONTENT_NAME}`;
-const MARKDOWN_EXTENSION = '.md';
-const HTML_EXTENSION = '.html';
-
-const isMarkdown = (fileName) => {
-  return fileName.endsWith(MARKDOWN_EXTENSION);
-};
-
-const isIndex = (item) => {
-  return item === 'index.md';
-}
-
-const getIndexName = (item) => {
-  return path.basename(path.dirname(`${CONTENT_PATH}/${item}`));
-}
-
-const getIndexPath = (item) => {
-  const indexPath = path.dirname(`${CONTENT_PATH}/${item}`).split(path.sep).pop();
-  return `${indexPath}${HTML_EXTENSION}`;
-}
-
-const getName = (item) => {
-  return isIndex(item) ? getIndexName(item) : item.replace(MARKDOWN_EXTENSION, '');
-}
-
-const getPath = (item) => {
-  return isIndex(item) ? getIndexPath(item) : `/${CONTENT_NAME}/${item.replace(MARKDOWN_EXTENSION, HTML_EXTENSION)}`;
-}
-
-const getNavItem = (item) => {
-  return {
-    name: getName(item),
-    path: getPath(item)
-  };
-}
-
-const getNav = () => {
-  const contentPath = path.join(__dirname, CONTENT_PATH);
-  return fs.readdirSync(contentPath).reduce((filtered, item) => {
-    if (isMarkdown(item)) {
-      filtered.push(getNavItem(item));
-    }
-    return filtered;
-  }, []);
+function isAdmin(path) {
+  return path === '/admin.md';
 }
 
 /**
@@ -72,10 +26,9 @@ const getNav = () => {
  * @param payload.content The content
  */
 function pre(payload, actions) {
-
-  payload.content.repoUrl = actions.secrets.REPO_API_ROOT;
-  payload.content.nav = getNav();
-  payload.content.time = `${new Date()}`;
+    payload.content.isAdmin = isAdmin(payload.request.path);
+    payload.content.hostName = `//${actions.request.headers.host}/`;
+    payload.content.time = `${new Date()}`;
 }
 
 module.exports.pre = pre;

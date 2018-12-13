@@ -1,0 +1,25 @@
+body {
+    font-family: adobe-clean, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.spectrum-Padding {
+    padding: 8px;
+}
+
+.helix-Editor {
+    font-family: source-code-pro, monospace;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    min-height: 800px;
+    border: none;
+}
+
+.helix-Icon.helix-Icon--action {
+    float: left;
+    margin-right: 8px;
+}
