@@ -7,6 +7,9 @@ import ButtonGroup from '@react/react-spectrum/ButtonGroup';
 import {ColumnView, ColumnViewDataSource} from '@react/react-spectrum/ColumnView';
 import unescapeJs from 'unescape-js';
 
+const MARKDOWN_EXTENSION = '.md';
+const HTML_EXTENSION = '.html';
+
 function getHostName() {
   const admin = document.getElementById('admin');
   if (admin) {
@@ -14,6 +17,10 @@ function getHostName() {
   }
   return null;
 }
+
+const isMarkdown = (fileName) => {
+  return fileName.endsWith(MARKDOWN_EXTENSION);
+};
 
 function getFetchUrl(type, sha) {
   const hostName = getHostName();
@@ -84,7 +91,9 @@ class App extends Component {
     }
     if (buttonValue === 'view') {
       const hostName = getHostName();
-      window.open(`${hostName}${this.state.selectedItems[0].label}`);
+      const { label } = this.state.selectedItems[0];
+      const fileName = isMarkdown(label) ? label.replace(MARKDOWN_EXTENSION, HTML_EXTENSION) : label;
+      window.open(`${hostName}${fileName}`);
     }
   }
 

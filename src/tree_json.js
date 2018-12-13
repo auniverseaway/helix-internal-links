@@ -6,6 +6,7 @@ const hiddenFiles = [
     'package.json',
     'spa',
     'config.yml',
+    'helix-config.yml',
     'LICENSE',
     'admin.md',
     'webpack.config.js'];

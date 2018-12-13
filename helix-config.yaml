@@ -1,3 +1,6 @@
+static: https://github.com/auniverseaway/helix-internal-links.git#master
+contentRepo: https://github.com/auniverseaway/helix-internal-links.git#master
+
 strains:
     default:
         code: /cmillar/default/git-github-com-auniverseaway-helix-internal-links-git--master--
