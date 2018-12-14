@@ -22,12 +22,14 @@ const isMarkdown = (fileName) => {
   return fileName.endsWith(MARKDOWN_EXTENSION);
 };
 
-function getFetchUrl(type, sha, label) {
+function getFetchUrl(type, item) {
   const hostName = getHostName();
-  const fetchUrl = new URL(`${hostName}index.${type}.json`);
-  if (sha) {
-    fetchUrl.searchParams.append('sha', sha);
-    fetchUrl.searchParams.append('label', label);
+  const fetchUrl = new URL(`${hostName}/index.${type}.json`);
+  if (type === 'tree') {
+    fetchUrl.searchParams.append('targetUrl', item.targetUrl);
+  }
+  if (item.sha) {
+    fetchUrl.searchParams.append('sha', item.sha);
   }
   return fetchUrl;
 }
@@ -35,7 +37,7 @@ function getFetchUrl(type, sha, label) {
 class HelixDS extends ColumnViewDataSource {
   async getChildren(item) {
     if (!item) {
-      return this.getTree({ sha: '', label: '' });
+      return this.getTree({ sha: '', targetUrl: '/' });
     }
     if (item.children) {
       return this.getTree(item);
@@ -53,7 +55,7 @@ class HelixDS extends ColumnViewDataSource {
 
   async getTree(item) {
     const data = await (await (
-        fetch(getFetchUrl('tree', item.sha, item.label)).then(res => {
+        fetch(getFetchUrl('tree', item)).then(res => {
           return res.json();
         }).catch(err => {
           console.log('Error: ', err);
@@ -94,8 +96,8 @@ class App extends Component {
     }
     if (buttonValue === 'view') {
       const hostName = getHostName();
-      const { label } = this.state.selectedItems[0];
-      const fileName = isMarkdown(label) ? label.replace(MARKDOWN_EXTENSION, HTML_EXTENSION) : label;
+      const { targetUrl } = this.state.selectedItems[0];
+      const fileName = isMarkdown(targetUrl) ? targetUrl.replace(MARKDOWN_EXTENSION, HTML_EXTENSION) : targetUrl;
       window.open(`${hostName}${fileName}`);
     }
   }
@@ -107,7 +109,7 @@ class App extends Component {
   async getLeafContent(item) {
     console.log(item);
     const data = await (await (
-        fetch(getFetchUrl('leaf', item.sha)).then(res => {
+        fetch(getFetchUrl('leaf', item)).then(res => {
           return res.text();
         }).catch(err => {
           console.log('Error: ', err);

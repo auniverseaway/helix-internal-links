@@ -21,13 +21,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>${content.title}</title>
-    <link rel="stylesheet" href="${content.hostName}spa/dist/css/index.css"/>
+    <link rel="stylesheet" href="${content.hostName}/spa/dist/css/index.css"/>
 </head>
 <body class="spectrum">
 <div data-sly-test="${content.isAdmin}" data-host-name="${content.hostName}" id="admin"></div>
 <div data-sly-test="${!content.isAdmin}" class="container" data-sly-list.child="${content.children}">
     ${child}
 </div>
-<script data-sly-test="${content.isAdmin}" src="${content.hostName}spa/dist/js/index.min.js" async></script>
+<script data-sly-test="${content.isAdmin}" src="${content.hostName}/spa/dist/js/index.min.js" async></script>
 </body>
 </html>

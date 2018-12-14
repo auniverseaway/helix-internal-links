@@ -27,7 +27,7 @@ function isAdmin(path) {
  */
 function pre(payload, actions) {
     payload.content.isAdmin = isAdmin(payload.request.path);
-    payload.content.hostName = `//${actions.request.headers.host}/`;
+    payload.content.hostName = `//${actions.request.headers.host}`;
     payload.content.time = `${new Date()}`;
 }
 

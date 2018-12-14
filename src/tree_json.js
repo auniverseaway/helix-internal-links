@@ -19,20 +19,16 @@ function isTree(file) {
     return file.type === 'tree';
 }
 
-function formatTree(tree, label, parent) {
-    let url = '/';
-    if (parent) {
-        url += `${parent}/`;
-    }
-    if (label) {
-        url += `${label}/`;
+function formatTree(tree, targetUrl) {
+    if (targetUrl === '/') {
+        targetUrl = '';
     }
     return tree.reduce((filtered, file) => {
         if (!isHiddenOrSrc(file.path)) {
             const displayFile = { 
                 label: file.path,
                 sha: file.sha,
-                url: `${url}${file.path}`,
+                targetUrl: `${targetUrl}/${file.path}`,
             };
             if (isTree(file)) {
                 displayFile.children = [];
@@ -45,9 +41,7 @@ function formatTree(tree, label, parent) {
 
 async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
-    const { sha } = payload.request.params;
-    const { label } = payload.request.params;
-    const { parent } = payload.request.params;
+    const { sha, targetUrl } = payload.request.params;
     const ref = sha || request.params.ref;
     const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/trees/${ref}`;
 
@@ -60,8 +54,8 @@ async function main(payload, { logger, request, secrets }) {
             console.log('Error: ', err);
         });
 
-    payload.response.body = formatTree(files.tree, label, parent);
-  
+    payload.response.body = formatTree(files.tree, targetUrl);
+
     return {
       response: payload.response
     };
