@@ -2,6 +2,7 @@ const client = require('request-promise-native');
 
 const hiddenFiles = [ 
     'src',
+    'favicon.ico',
     'package-lock.json',
     'package.json',
     'spa',
