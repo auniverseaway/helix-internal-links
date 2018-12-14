@@ -19,24 +19,8 @@
     "url": "https://github.com/auniverseaway/helix-internal-links/issues"
   },
   "homepage": "https://github.com/auniverseaway/helix-internal-links#readme",
-  "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.2.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
-    "css-loader": "^2.0.0",
-    "mini-css-extract-plugin": "^0.5.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
-  },
   "dependencies": {
-    "@react/react-spectrum": "^2.15.0",
     "request": "^2.87.0",
-    "request-promise-native": "^1.0.5",
-    "unescape-js": "^1.1.1"
+    "request-promise-native": "^1.0.5"
   }
 }
