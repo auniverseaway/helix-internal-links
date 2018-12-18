@@ -18,18 +18,6 @@ async function main(payload, { logger, request, secrets }) {
             console.log('Error: ', err);
         });
 
-
-    // const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/blobs/${sha}`;
-
-    // const leaf = await (await (fetch(url)
-    //   .then(res => {
-    //     return res.json();
-    //   })
-    //   .catch(err => {
-    //     console.log('Error: ', err);
-    //   })
-    // ));
-
     const content = decodeContent(leaf.content);
     payload.response.body = content;
 
