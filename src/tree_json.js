@@ -5,7 +5,7 @@ const hiddenFiles = [
     'favicon.ico',
     'package-lock.json',
     'package.json',
-    'spa',
+    'client',
     'config.yml',
     'helix-config.yaml',
     'LICENSE',
