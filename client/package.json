@@ -4,6 +4,7 @@
   "description": "An admin POC for Helix",
   "main": "index.js",
   "scripts": {
+    "build-client": "parcel build src/js/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,9 +18,17 @@
     "url": "https://github.com/auniverseaway/helix-internal-links/issues"
   },
   "homepage": "https://github.com/auniverseaway/helix-internal-links#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "parcel-bundler": "^1.10.3",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
   "dependencies": {
-    "request": "^2.87.0",
-    "request-promise-native": "^1.0.5",
+    "@react/react-spectrum": "^2.15.0",
     "unescape-js": "^1.1.1"
   }
 }
