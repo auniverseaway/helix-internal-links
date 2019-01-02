@@ -1,8 +1,16 @@
-static: https://github.com/auniverseaway/helix-internal-links.git#master
-contentRepo: https://github.com/auniverseaway/helix-internal-links.git#master
+content: https://github.com/auniverseaway/helix-internal-links.git
+code: https://github.com/auniverseaway/helix-internal-links.git
+directoryIndex: index.html
 
 strains:
     default:
         code: /cmillar/default/git-github-com-auniverseaway-helix-internal-links-git--master--
-        static: https://github.com/auniverseaway/helix-internal-links.git#master
-        content: https://github.com/auniverseaway/helix-internal-links.git#master
+        url: https://cmillar.helix-demo.xyz
+        content:
+            repo: helix-internal-links
+            ref: master
+            owner: auniverseaway
+        static:
+            repo: helix-internal-links
+            ref: master
+            owner: auniverseaway
