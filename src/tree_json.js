@@ -6,6 +6,7 @@ const hiddenFiles = [
     'package-lock.json',
     'package.json',
     'client',
+    'spa',
     'config.yml',
     'helix-config.yaml',
     'LICENSE',

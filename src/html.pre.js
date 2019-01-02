@@ -16,8 +16,19 @@
  *
  */
 
+const LOCAL_HOSTNAME = 'localhost:3000';
+const PROD_HOSTNAME = 'cmillar.project-helix.xyz';
+
 function isAdmin(path) {
   return path === '/admin.md';
+}
+
+function isDev(host) {
+  return host.includes(LOCAL_HOSTNAME);
+}
+
+function getHostName(host) {
+  return isDev(host) ? `//${LOCAL_HOSTNAME}` : `//${PROD_HOSTNAME}`;
 }
 
 /**
@@ -27,7 +38,7 @@ function isAdmin(path) {
  */
 function pre(payload, actions) {
     payload.content.isAdmin = isAdmin(payload.request.path);
-    payload.content.hostName = `//${actions.request.headers.host}`;
+    payload.content.hostName = getHostName(actions.request.headers.host);
     payload.content.time = `${new Date()}`;
 }
 
