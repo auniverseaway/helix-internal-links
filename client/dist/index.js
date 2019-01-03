@@ -50775,7 +50775,7 @@ function getHostName() {
   var admin = document.getElementById('admin');
 
   if (admin) {
-    return "".concat(window.location.protocol).concat(admin.dataset.hostName);
+    return admin.dataset.hostName;
   }
 
   return null;

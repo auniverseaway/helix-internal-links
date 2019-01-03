@@ -13,7 +13,7 @@ const HTML_EXTENSION = '.html';
 function getHostName() {
   const admin = document.getElementById('admin');
   if (admin) {
-    return `${window.location.protocol}${admin.dataset.hostName}`;
+    return admin.dataset.hostName;
   }
   return null;
 }
