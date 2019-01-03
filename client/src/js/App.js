@@ -37,6 +37,7 @@ function getFetchUrl(type, item) {
 class HelixDS extends ColumnViewDataSource {
   async getChildren(item) {
     if (!item) {
+      console.log('no item');
       return this.getTree({ sha: '', targetUrl: '/' });
     }
     if (item.children) {

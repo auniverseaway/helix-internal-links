@@ -4,6 +4,7 @@
   "description": "An admin POC for Helix",
   "main": "index.js",
   "scripts": {
+    "watch-client": "parcel watch src/js/index.js",
     "build-client": "parcel build src/js/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

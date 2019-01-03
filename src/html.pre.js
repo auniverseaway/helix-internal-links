@@ -28,7 +28,7 @@ function isDev(host) {
 }
 
 function getHostName(host) {
-  return isDev(host) ? `//${LOCAL_HOSTNAME}` : `//${PRODUCTION_HOSTNAME}`;
+  return isDev(host) ? `http://${LOCAL_HOSTNAME}` : `https://${PRODUCTION_HOSTNAME}`;
 }
 
 /**
