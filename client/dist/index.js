@@ -50788,6 +50788,7 @@ var isMarkdown = function isMarkdown(fileName) {
 function getFetchUrl(type, item) {
   var hostName = getHostName();
   var fetchUrl = new URL("".concat(hostName, "/index.").concat(type, ".json"));
+  console.log(fetchUrl);
 
   if (type === 'tree') {
     fetchUrl.searchParams.append('hlx_targetUrl', item.targetUrl);
@@ -51414,7 +51415,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50767" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55352" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
