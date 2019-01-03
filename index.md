@@ -43,6 +43,3 @@ This site highlights several concepts working together on Helix.
 * Leverage query params for passing data from client to server.
   * Query Param Support - New Helix Simulator December 2018 feature
   * Query Param whitelist - `helix-config.yaml`
-
-## Video
-If you're looking for a little more context around Helix and this demo, you can [watch a brief video here](https://www.youtube.com/watch?v=86-gpZlV5Zw).
