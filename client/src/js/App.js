@@ -40,6 +40,7 @@ class HelixDS extends ColumnViewDataSource {
       return this.getTree({ sha: '', targetUrl: '/' });
     }
     if (item.children) {
+      console.log(item);
       return this.getTree(item);
     }
     return item.children;
