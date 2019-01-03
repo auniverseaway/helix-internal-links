@@ -24,7 +24,7 @@ const isMarkdown = (fileName) => {
 
 function getFetchUrl(type, item) {
   const hostName = getHostName();
-  const fetchUrl = new URL(`${hostName}/index.${type}.json`);
+  const fetchUrl = new URL(`/index.${type}.json`, hostName);
   console.log(fetchUrl);
   if (type === 'tree') {
     fetchUrl.searchParams.append('hlx_targetUrl', item.targetUrl);
@@ -32,6 +32,7 @@ function getFetchUrl(type, item) {
   if (item.sha) {
     fetchUrl.searchParams.append('hlx_sha', item.sha);
   }
+  console.log(fetchUrl);
   return fetchUrl;
 }
 

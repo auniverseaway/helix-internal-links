@@ -14,3 +14,6 @@ strains:
             repo: helix-internal-links
             ref: master
             owner: auniverseaway
+        params:
+            - hlx_sha
+            - hlx_targetUrl
