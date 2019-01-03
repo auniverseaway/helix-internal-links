@@ -17,7 +17,7 @@
  */
 
 const LOCAL_HOSTNAME = 'localhost:3000';
-const PROD_HOSTNAME = 'cmillar.helix-demo.xyz';
+const PRODUCTION_HOSTNAME = 'cmillar.helix-demo.xyz';
 
 function isAdmin(path) {
   return path === '/admin.md';
@@ -28,7 +28,7 @@ function isDev(host) {
 }
 
 function getHostName(host) {
-  return isDev(host) ? `//${LOCAL_HOSTNAME}` : `//${PROD_HOSTNAME}`;
+  return isDev(host) ? `//${LOCAL_HOSTNAME}` : `//${PRODUCTION_HOSTNAME}`;
 }
 
 /**
