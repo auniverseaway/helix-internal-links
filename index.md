@@ -16,19 +16,33 @@
   -->
 ![helix-logo](./helix_logo.png)
 
-# Helix - internal
+# Helix - Admin Console
 
-It works! internal is up and running.
+This site highlights several concepts working together on Helix.
 
-## What's next?
+## [TRY IT OUT](/admin.html)
 
-1. Try editing `index.md` and see what happens.
-2. Try editing `src/html.htl` to change the HTML output
-3. Try editing `src/static/style.css` to change the way this page looks
+## User Features
+* Use the admin console to easily traverse complex content trees.
+* Use the admin console to edit the content (no save support).
+* Use the admin console to view the content.
 
-## And then?
+## Nerd Features
+* A server-side proxy pattern to:
+  * Eliminate local CORs issues
+  * Sanitize un-wanted code or content (src, .gitignore, etc.)
+  * Aleviate redundant direct GitHub API calls
+  * Cache query paramed responses (probably?)
+  * Inteligently build full URLs of content.
+  * Leverage Helix's new `git-server` feature for [GitHub's Tree API](https://developer.github.com/v3/git/trees/).
+* A Single page application (SPA) built with:
+  * React
+  * Spectrum
+  * Parcel
+  * Babel
+* Leverage query params for passing data from client to server.
+  * Query Param Support - New Helix Simulator December 2018 feature
+  * Query Param whitelist - `helix-config.yaml`
 
-4. Commit your changes: `git commit -a`
-5. Publish your project to GitHub: `git add git remote add origin https://github.com/user/repo.git && git push`
-6. Deploy the project: `hlx deploy`
-7. Make it visible to the world: `hlx strains`
+## Video
+If you're looking for a little more context around Helix and this demo, you can [watch a brief video here](https://www.youtube.com/watch?v=86-gpZlV5Zw).

@@ -2,8 +2,20 @@ body {
     font-family: adobe-clean, Helvetica, sans-serif;
 }
 
+code {
+    border: 1px solid #d8d8d8;
+    background: #fff0da;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
 * {
     box-sizing: border-box;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .spectrum-Padding {
