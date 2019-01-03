@@ -7,8 +7,8 @@ function decodeContent(content) {
 
 async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
-    const { sha } = payload.request.params;
-    const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/blobs/${sha}`;
+    const { hlx_sha } = payload.request.params;
+    const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/blobs/${hlx_sha}`;
     
     const options = { uri: url, json: true, headers: { 'User-Agent': 'Request-Promise' } };
     const leaf = await client(options)

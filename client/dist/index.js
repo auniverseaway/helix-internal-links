@@ -50790,11 +50790,11 @@ function getFetchUrl(type, item) {
   var fetchUrl = new URL("".concat(hostName, "/index.").concat(type, ".json"));
 
   if (type === 'tree') {
-    fetchUrl.searchParams.append('targetUrl', item.targetUrl);
+    fetchUrl.searchParams.append('hlx_targetUrl', item.targetUrl);
   }
 
   if (item.sha) {
-    fetchUrl.searchParams.append('sha', item.sha);
+    fetchUrl.searchParams.append('hlx_sha', item.sha);
   }
 
   return fetchUrl;
@@ -50822,29 +50822,28 @@ function (_ColumnViewDataSource) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (item) {
-                  _context.next = 3;
+                  _context.next = 2;
                   break;
                 }
 
-                console.log('no item');
                 return _context.abrupt("return", this.getTree({
                   sha: '',
                   targetUrl: '/'
                 }));
 
-              case 3:
+              case 2:
                 if (!item.children) {
-                  _context.next = 6;
+                  _context.next = 5;
                   break;
                 }
 
                 console.log(item);
                 return _context.abrupt("return", this.getTree(item));
 
-              case 6:
+              case 5:
                 return _context.abrupt("return", item.children);
 
-              case 7:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -51415,7 +51414,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55477" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50767" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -43,8 +43,8 @@ function formatTree(tree, targetUrl) {
 
 async function main(payload, { logger, request, secrets }) {
     payload.response = payload.response || {};
-    const { sha, targetUrl } = payload.request.params;
-    const ref = sha || request.params.ref;
+    const { hlx_sha, hlx_targetUrl } = payload.request.params;
+    const ref = hlx_sha || request.params.ref;
     const url = `${secrets.REPO_API_ROOT}repos/${request.params.owner}/${request.params.repo}/git/trees/${ref}`;
 
     const options = { uri: url, json: true, headers: { 'User-Agent': 'Request-Promise' } };
@@ -55,8 +55,8 @@ async function main(payload, { logger, request, secrets }) {
         .catch((err) => {
             console.log('Error: ', err);
         });
-
-    payload.response.body = formatTree(files.tree, targetUrl);
+    
+    payload.response.body = formatTree(files.tree, hlx_targetUrl);
 
     return {
       response: payload.response

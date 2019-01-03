@@ -26,10 +26,10 @@ function getFetchUrl(type, item) {
   const hostName = getHostName();
   const fetchUrl = new URL(`${hostName}/index.${type}.json`);
   if (type === 'tree') {
-    fetchUrl.searchParams.append('targetUrl', item.targetUrl);
+    fetchUrl.searchParams.append('hlx_targetUrl', item.targetUrl);
   }
   if (item.sha) {
-    fetchUrl.searchParams.append('sha', item.sha);
+    fetchUrl.searchParams.append('hlx_sha', item.sha);
   }
   return fetchUrl;
 }
@@ -37,7 +37,6 @@ function getFetchUrl(type, item) {
 class HelixDS extends ColumnViewDataSource {
   async getChildren(item) {
     if (!item) {
-      console.log('no item');
       return this.getTree({ sha: '', targetUrl: '/' });
     }
     if (item.children) {
